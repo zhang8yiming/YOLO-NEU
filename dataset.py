@@ -165,7 +165,7 @@ class COCODataset(RandomCyclicDataset):
                  trans_fn=None, subset_idx=None):
         self.trans_fn = trans_fn
         self.subset_idx = subset_idx
-        self.img_list, self.label_list = self._get_images_and_labels(targ_txt_path, data_path)
+        self.img_list, self.label_list = self._get_images_and_labels(targ_txt_path, data_path,label_path)
         super().__init__(batch_size, shuffle, cyclic, dim, rand_dim_interval)
         
     def get_base_indices(self):

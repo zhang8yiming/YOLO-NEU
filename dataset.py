@@ -208,12 +208,12 @@ class COCODataset(RandomCyclicDataset):
         label_path = self.label_list[sel_idx]
 
         # label_path = '/'.join(label_path.split('/')[-4:])
-        # print('label_path:', label_path)
+        print('label_path:', label_path)
 
         if osp.exists(label_path):
             label = np.loadtxt(label_path).reshape(-1,5)
 
-        # print('label', label)
+        print('label', label)
         
         sample = { 'img': img, 'org_img': img.copy(), 'label': label, 'transform': None, 'img_path': img_path }
         sample = transform(sample)

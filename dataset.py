@@ -161,7 +161,7 @@ class RandomCyclicDataset(Dataset):
         
 class COCODataset(RandomCyclicDataset):
     
-    def __init__(self, targ_txt_path, data_path, batch_size, shuffle=True, cyclic=True, dim=None, rand_dim_interval=None,
+    def __init__(self, targ_txt_path, data_path,label_path, batch_size, shuffle=True, cyclic=True, dim=None, rand_dim_interval=None,
                  trans_fn=None, subset_idx=None):
         self.trans_fn = trans_fn
         self.subset_idx = subset_idx
@@ -175,13 +175,14 @@ class COCODataset(RandomCyclicDataset):
             base_indices = base_indices[self.subset_idx]
         return base_indices.tolist()
     
-    def _get_images_and_labels(self, targ_txt_path, data_path):
+    def _get_images_and_labels(self, targ_txt_path, data_path, label_path):
         with open(targ_txt_path, 'r') as f:
-            img_list = [data_path + '/IMAGES/' + lines.strip().replace('.txt', '.jpg').strip()  if lines.strip().endswith('.txt') else data_path + '/IMAGES/' + lines.strip() for lines in f.readlines()]
+            label_list = [label_path + lines for lines in f.readlines() ]
+            img_list = [data_path + lines.strip().replace('.txt', '.jpg').strip()  if lines.strip().endswith('.txt') else data_path + lines.strip() for lines in f.readlines()]
 
         # print(img_list[:5])
 
-        label_list = [img_path.replace('jpg', 'txt').replace('IMAGES', 'ANNOTATIONS') for img_path in img_list]
+        # label_list = [labels_path + img_path.replace('jpg', 'txt').replace('IMAGES', 'ANNOTATIONS') for img_path in img_list]
         # print(label_list[:5])
 
         return img_list, label_list

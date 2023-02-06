@@ -176,13 +176,20 @@ class COCODataset(RandomCyclicDataset):
         return base_indices.tolist()
     
     def _get_images_and_labels(self, targ_txt_path, data_path, labels_path):
+        label_list = []
+        img_list = [] 
+
         with open(targ_txt_path, 'r') as f:
-            label_list = [labels_path + lines for lines in f.readlines() ]
-            img_list = [data_path + lines.strip().replace('.txt', '.jpg').strip()  if lines.strip().endswith('.txt') else data_path + lines.strip() for lines in f.readlines()]
+            for lines in f.readlines():
+               label_list.append(labels_path + lines.strip())
+               img_list.append(data_path + lines.strip().replace('.txt', '.jpg'))
+        
+            # if lines.strip().endswith('.txt') else data_path + lines.strip() 
 
         print(img_list[:5])
+        print('img_list length:', len(img_list))
         print(label_list[:5]) 
-
+        print('label_list length:', len(label_list))
         # label_list = [labels_path + img_path.replace('jpg', 'txt').replace('IMAGES', 'ANNOTATIONS') for img_path in img_list]
         # print(label_list[:5])
 

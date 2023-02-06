@@ -186,10 +186,10 @@ class COCODataset(RandomCyclicDataset):
         
             # if lines.strip().endswith('.txt') else data_path + lines.strip() 
 
-        print(img_list[:5])
-        print('img_list length:', len(img_list))
-        print(label_list[:5]) 
-        print('label_list length:', len(label_list))
+        # print(img_list[:5])
+        # print('img_list length:', len(img_list))
+        # print(label_list[:5]) 
+        # print('label_list length:', len(label_list))
         # label_list = [labels_path + img_path.replace('jpg', 'txt').replace('IMAGES', 'ANNOTATIONS') for img_path in img_list]
         # print(label_list[:5])
 
@@ -224,7 +224,7 @@ class COCODataset(RandomCyclicDataset):
         else:
             print('label_path missing:', label_path)
 
-        print('label', label)
+        # print('label', label)
         
         sample = { 'img': img, 'org_img': img.copy(), 'label': label, 'transform': None, 'img_path': img_path }
         sample = transform(sample)
